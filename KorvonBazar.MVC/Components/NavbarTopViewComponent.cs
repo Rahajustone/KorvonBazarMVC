@@ -13,12 +13,11 @@ public class NavbarTopViewComponent : ViewComponent
         _httpContextAccessor = httpContextAccessor;
     }
 
-
     public async Task<IViewComponentResult> InvokeAsync()
     {
 
         string name = GetUserInfo();
-        return View(name);
+        return View();
     }
 
     private string GetUserInfo()

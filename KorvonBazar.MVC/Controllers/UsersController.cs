@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
-using KorvonBazar.Areas.Identity.Data;
+using KorvonBazar.MVC.Core.Domain;
 using KorvonBazar.Services;
 using KorvonBazar.ViewModels;
 using KorvonBazar.ViewModels.Request;
@@ -19,20 +19,20 @@ namespace KorvonBazar.Controllers
 {
 	public class UsersController : Controller
 	{
-        private readonly SignInManager<KorvonBazarUser> _signInManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly UserManager<KorvonBazarUser> _userManager;
-        private readonly IUserStore<KorvonBazarUser> _userStore;
+        private readonly UserManager<User> _userManager;
+        private readonly IUserStore<User> _userStore;
         private readonly IFileUploaderHandler _fileUploaderHandler;
-        private readonly IUserEmailStore<KorvonBazarUser> _emailStore;
+        private readonly IUserEmailStore<User> _emailStore;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<Login> _logger;
         //public string ReturnUrl { get; set; }
 
         public UsersController(
-            SignInManager<KorvonBazarUser> signInManager,
-            UserManager<KorvonBazarUser> userManager,
-            IUserStore<KorvonBazarUser> userStore,
+            SignInManager<User> signInManager,
+            UserManager<User> userManager,
+            IUserStore<User> userStore,
             IFileUploaderHandler fileUploaderHandler,
             RoleManager<IdentityRole> roleManager,
             IEmailSender emailSender,
@@ -50,19 +50,19 @@ namespace KorvonBazar.Controllers
         }
 
         public IActionResult Index()
-		{
-			return View();
-		}
+        {
+            return View();
+        }
 
-		[HttpGet]
-		public IActionResult Login()
-		{
-			return View();
-		}
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
 
-		[HttpPost]
-		public async Task<IActionResult> Login([FromForm] Login Input)
-		{
+        [HttpPost]
+        public async Task<IActionResult> Login([FromForm] Login Input)
+        {
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -96,14 +96,15 @@ namespace KorvonBazar.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromForm]RegisterUserAndShop Input)
+        public async Task<IActionResult> Register([FromForm] RegisterUserAndShop Input)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return View();
 
             var toUpperCase = Input.User.Email.ToUpper();
             var userExist = await _userManager.FindByEmailAsync(toUpperCase);
-            if ( userExist != null) {
+            if (userExist != null)
+            {
                 ModelState.AddModelError(string.Empty, "Users already existed");
 
                 return View();
@@ -122,7 +123,7 @@ namespace KorvonBazar.Controllers
                 user.Email = Input.User.Email;
                 user.EmailConfirmed = true; // confirm for now
 
-                if(Input.Shop.ShopPicture != null)
+                if (Input.Shop.ShopPicture != null)
                 {
                     var newFileName = await _fileUploaderHandler.SaveFileAsync(Input.Shop.ShopPicture, "photo");
                     user.ShopPicture = newFileName;
@@ -173,27 +174,27 @@ namespace KorvonBazar.Controllers
             }
         }
 
-        private KorvonBazarUser CreateUser()
+        private User CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<KorvonBazarUser>();
+                return Activator.CreateInstance<User>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(KorvonBazarUser)}'. " +
-                    $"Ensure that '{nameof(KorvonBazarUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(User)}'. " +
+                    $"Ensure that '{nameof(User)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<KorvonBazarUser> GetEmailStore()
+        private IUserEmailStore<User> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<KorvonBazarUser>)_userStore;
+            return (IUserEmailStore<User>)_userStore;
         }
     }
 }

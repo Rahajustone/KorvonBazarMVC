@@ -30,9 +30,15 @@
     <None Remove="CustomFilters\" />
     <None Remove="ViewModels\Request\" />
     <None Remove="ViewModels\Response\" />
-    <None Remove="Data\" />
     <None Remove="Components\" />
     <None Remove="Views\Shared\Components\" />
+    <None Remove="Core\" />
+    <None Remove="Core\Domain\" />
+    <None Remove="Core\Repositories\" />
+    <None Remove="Persistence\" />
+    <None Remove="Persistence\Repositories\" />
+    <None Remove="Persistence\EntityConfigurations\" />
+    <None Remove="Extensions\DependencyInjection\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Users\" />
@@ -42,8 +48,14 @@
     <Folder Include="CustomFilters\" />
     <Folder Include="ViewModels\Request\" />
     <Folder Include="ViewModels\Response\" />
-    <Folder Include="Data\" />
     <Folder Include="Components\" />
     <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Core\" />
+    <Folder Include="Core\Domain\" />
+    <Folder Include="Core\Repositories\" />
+    <Folder Include="Persistence\" />
+    <Folder Include="Persistence\Repositories\" />
+    <Folder Include="Persistence\EntityConfigurations\" />
+    <Folder Include="Extensions\DependencyInjection\" />
   </ItemGroup>
 </Project>
