@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KorvonBazar", "KorvonBazar.MVC\KorvonBazar.csproj", "{636FE529-ADAC-47FA-B417-09E113F38B3A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KorvonBazar.MVC", "KorvonBazar.MVC\KorvonBazar.MVC.csproj", "{636FE529-ADAC-47FA-B417-09E113F38B3A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KorvonBazar.Domain", "KorvonBazar.Domain\KorvonBazar.Domain.csproj", "{7633CB99-FF1A-4EDB-AF36-0541C96CA7CA}"
 EndProject

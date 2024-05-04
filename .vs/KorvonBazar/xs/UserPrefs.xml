@@ -1,8 +1,6 @@
 ﻿<Properties StartupConfiguration="{636FE529-ADAC-47FA-B417-09E113F38B3A}|https">
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.KorvonBazar.Domain FirstBuild="True" />
-  <MonoDevelop.Ide.ItemProperties.KorvonBazar.Infrastructure FirstBuild="True" />
   <MonoDevelop.Ide.Workbench ActiveDocument="KorvonBazar.MVC/wwwroot/lib/bootstrap/dist/css/bootstrap.css">
     <Files>
       <File FileName="KorvonBazar.MVC/wwwroot/lib/bootstrap/dist/css/bootstrap.css" Line="1" Column="1" />
@@ -20,6 +18,6 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints />
-  <MonoDevelop.Ide.ItemProperties.KorvonBazar PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.KorvonBazar.MVC PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>

@@ -5,9 +5,9 @@ using KorvonBazar.Areas.Identity.Data;
 
 namespace KorvonBazar.Data;
 
-public class KorvonBazarContext : IdentityDbContext<KorvonBazarUser>
+public class ApplicationDbContext : IdentityDbContext<KorvonBazarUser>
 {
-    public KorvonBazarContext(DbContextOptions<KorvonBazarContext> options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
     }
@@ -19,4 +19,5 @@ public class KorvonBazarContext : IdentityDbContext<KorvonBazarUser>
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);
     }
+
 }

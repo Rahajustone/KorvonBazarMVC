@@ -8,11 +8,11 @@ using KorvonBazar.CustomFilters;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("KorvonBazarContextConnection") ?? throw new InvalidOperationException("Connection string 'KorvonBazarContextConnection' not found.");
 
-builder.Services.AddDbContext<KorvonBazarContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<KorvonBazarUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<KorvonBazarContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

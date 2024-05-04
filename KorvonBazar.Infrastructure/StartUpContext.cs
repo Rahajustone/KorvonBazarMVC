@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using KorvonBazar.Domain.Users;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using KorvonBazar.Areas.Identity.Data;
 
 namespace KorvonBazar.Data;
 
-public class KorvonBazarContext : IdentityDbContext<KorvonBazarUser>
+public class KorvonBazarContext : IdentityDbContext<User>
 {
     public KorvonBazarContext(DbContextOptions<KorvonBazarContext> options)
         : base(options)

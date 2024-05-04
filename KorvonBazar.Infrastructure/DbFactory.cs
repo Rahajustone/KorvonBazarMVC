@@ -1,14 +1,16 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
+
 namespace KorvonBazar.Infrastructure;
 
 public class DbFactory : IDisposable
 {
     private bool _disposed;
-    private Func<AppDbContext> _instanceFunc;
-    //private DbContext _dbContext;
-    //public DbContext DbContext => _dbContext ?? (_dbContext = _instanceFunc.Invoke());
+    private Func<ApplicationDbContext> _instanceFunc;
+    private DbContext _dbContext;
+    public DbContext DbContext => _dbContext ?? (_dbContext = _instanceFunc.Invoke());
 
-    public DbFactory(Func<AppDbContext> dbContextFactory)
+    public DbFactory(Func<ApplicationDbContext> dbContextFactory)
     {
         _instanceFunc = dbContextFactory;
     }
@@ -18,7 +20,7 @@ public class DbFactory : IDisposable
         if (!_disposed && _dbContext != null)
         {
             _disposed = true;
-            //_dbContext.Dispose();
+            _dbContext.Dispose();
         }
     }
 }

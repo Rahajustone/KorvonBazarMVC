@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KorvonBazar.Migrations
 {
-    [DbContext(typeof(KorvonBazarContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20240501122229_ShopInfoOwner")]
     partial class ShopInfoOwner
     {

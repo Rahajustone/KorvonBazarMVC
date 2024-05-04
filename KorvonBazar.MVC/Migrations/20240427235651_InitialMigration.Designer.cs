@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KorvonBazar.Migrations
 {
-    [DbContext(typeof(KorvonBazarContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20240427235651_InitialMigration")]
     partial class InitialMigration
     {

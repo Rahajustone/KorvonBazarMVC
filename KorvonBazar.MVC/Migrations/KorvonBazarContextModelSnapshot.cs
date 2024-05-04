@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KorvonBazar.Migrations
 {
-    [DbContext(typeof(KorvonBazarContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class KorvonBazarContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
