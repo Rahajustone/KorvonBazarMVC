@@ -7,7 +7,7 @@ namespace KorvonBazar.MVC.Persistence.Repositories;
 
 public class UserRepository : Repository<User>, IUserRepository
 {
-    public UserRepository(DbContext context) : base(context)
+    public UserRepository(ApplicationDbContext context) : base(context)
     {
     }
 }

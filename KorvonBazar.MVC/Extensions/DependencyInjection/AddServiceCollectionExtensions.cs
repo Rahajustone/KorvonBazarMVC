@@ -3,6 +3,7 @@ using KorvonBazar.MVC.Core;
 using KorvonBazar.MVC.Core.Domain;
 using KorvonBazar.MVC.Core.Repositories;
 using KorvonBazar.MVC.Persistence;
+using KorvonBazar.MVC.Persistence.Repositories;
 using KorvonBazar.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -63,9 +64,9 @@ namespace KorvonBazar.MVC.Extensions.DependencyInjection
         {
             services.AddScoped<IFileUploaderHandler, FileUploaderHandler>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }
     }
 }
-

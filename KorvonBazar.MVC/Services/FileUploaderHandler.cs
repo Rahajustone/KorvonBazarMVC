@@ -37,17 +37,19 @@ public class FileUploaderHandler: IFileUploaderHandler
 
     public async Task<string> SaveFileAsync(IFormFile file, string? filePathToUpload=null)
     {
-        string newFileName = _env.WebRootPath;
+        string newFileDistination = _env.WebRootPath;
+        string newFileName = GetFileName(file, true);
+
         if (!string.IsNullOrEmpty(filePathToUpload))
         {
-            if (!Directory.Exists(filePathToUpload))
-                Directory.CreateDirectory(_env.WebRootPath + "/" + filePathToUpload);
+            if (!Directory.Exists(Path.Combine(_env.WebRootPath, filePathToUpload)))
+                Directory.CreateDirectory(Path.Combine(_env.WebRootPath, filePathToUpload));
 
-            newFileName = newFileName +  "/" + filePathToUpload; 
-        }        
+            newFileName = Path.Combine(filePathToUpload, newFileName);
+        }
 
-        newFileName = Path.Combine(newFileName, GetFileName(file, true));
-        using (var fileStream = new FileStream(newFileName, FileMode.Create))
+        newFileDistination = Path.Join(newFileDistination, newFileName);
+        using (var fileStream = new FileStream(newFileDistination, FileMode.Create))
         {
             await file.CopyToAsync(fileStream);
         }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using KorvonBazar.Models;
 using System.Diagnostics;
+using KorvonBazar.MVC.Core;
 
 namespace KorvonBazar.Controllers
 {
@@ -9,14 +10,22 @@ namespace KorvonBazar.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            this.unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
+            var res = this.unitOfWork.User.GetAll();
+
+            foreach (var item in res)
+            {
+                Console.WriteLine(item.ShopName);
+            }
             return View();
         }
 

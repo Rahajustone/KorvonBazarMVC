@@ -11,6 +11,7 @@ public class UnitOfWork : IUnitOfWork
     public UnitOfWork(ApplicationDbContext context)
     {
         _context = context;
+        User = new Repositories.UserRepository(_context);
     }
 
     public IUserRepository User { get; private set; }

@@ -2,10 +2,12 @@
 using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
+using KorvonBazar.MVC.Core;
 using KorvonBazar.MVC.Core.Domain;
 using KorvonBazar.Services;
 using KorvonBazar.ViewModels;
 using KorvonBazar.ViewModels.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -27,6 +29,8 @@ namespace KorvonBazar.Controllers
         private readonly IUserEmailStore<User> _emailStore;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<Login> _logger;
+        private readonly IUnitOfWork _iow;
+
         //public string ReturnUrl { get; set; }
 
         public UsersController(
@@ -36,7 +40,9 @@ namespace KorvonBazar.Controllers
             IFileUploaderHandler fileUploaderHandler,
             RoleManager<IdentityRole> roleManager,
             IEmailSender emailSender,
-            ILogger<Login> logger
+            ILogger<Login> logger,
+            IUnitOfWork iow
+
         )
         {
             _signInManager = signInManager;
@@ -47,6 +53,7 @@ namespace KorvonBazar.Controllers
             _emailSender = emailSender;
             _emailStore = GetEmailStore();
             _logger = logger;
+            _iow = iow;
         }
 
         public IActionResult Index()
@@ -102,6 +109,7 @@ namespace KorvonBazar.Controllers
                 return View();
 
             var toUpperCase = Input.User.Email.ToUpper();
+
             var userExist = await _userManager.FindByEmailAsync(toUpperCase);
             if (userExist != null)
             {
@@ -157,6 +165,22 @@ namespace KorvonBazar.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> LogOut(string returnUrl = null)
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+            if (returnUrl != null)
+            {
+                return LocalRedirect(returnUrl);
+            }
+            else
+            {
+                return Redirect("login");
+            }
+        }
+
 
         private async Task AddDefaultRoleAsync(string defaultRole)
         {

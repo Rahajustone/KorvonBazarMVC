@@ -66,5 +66,15 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         Context.Set<TEntity>().RemoveRange(entities);
     }
+
+    public async Task<TEntity> SingelOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        return await Context.Set<TEntity>().SingleOrDefaultAsync(predicate);
+    }
+
+    public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        return await Context.Set<TEntity>().FindAsync(predicate);
+    }
 }
 

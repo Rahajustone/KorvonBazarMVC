@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using KorvonBazar.MVC.Extensions.DependencyInjection;
+using System.Configuration;
+using KorvonBazar.MVC.Services;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("KorvonBazarContextConnection") ?? throw new InvalidOperationException("Connection string 'KorvonBazarContextConnection' not found.");
@@ -7,10 +10,17 @@ var connectionString = builder.Configuration.GetConnectionString("KorvonBazarCon
 builder.Services.AddDbContextServices(connectionString);
 builder.Services.AddConfiguration();
 builder.Services.AddApplicationServices();
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.InstanceName = "localRedis_";
+});
 
+builder.Services.AddScoped<ICatcheService, CatcheService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
